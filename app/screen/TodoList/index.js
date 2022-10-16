@@ -9,15 +9,18 @@ import {
 import React, {useState} from 'react';
 import Header from './_components/Header';
 import {useDispatch, useSelector} from 'react-redux';
-import {addTodo, completed, removeTodo} from '../../redux/todosSlice';
+import {addTodo, completed, removeTodo, selectorTodos} from '../../redux/todosSlice';
 
 import IconTrash from 'react-native-vector-icons/Entypo';
 
 const TodoList = () => {
   const todos = useSelector(state => state.todos.todos);
+  
+  
   const [text, setText] = useState();
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
+
     return (
         <View style={{}}>
       <TouchableOpacity

@@ -9,8 +9,10 @@ export const todosSLice=createSlice({
         ]
     },
     reducers:{
-        addTodo:(state,action)=>{
-            state.todos=[...state.todos,{id:helper.uniqid(),todo:action.payload}]
+        addTodo:{
+           reducer: (state,action)=>{
+                state.todos=[...state.todos,{id:helper.uniqid(),todo:action.payload,completed:false}]
+            }
         },
         completed:(state,action)=>{
             state.todos.forEach(todo=>{
@@ -24,6 +26,7 @@ export const todosSLice=createSlice({
         }
     }
 })
+
 
 export const {addTodo,completed,removeTodo} =todosSLice.actions
 export default todosSLice.reducer
