@@ -13,7 +13,8 @@ export const getTodoAsync=createAsyncThunk('db/getTodoAsync',async()=>{
 })
 
 export const addTodoAsync=createAsyncThunk('db/addTodoAsync',async(data)=>{
-   const response=await  axios.post('https://jsonplaceholder.typicode.com/todos',data)
+   const response=await  axios.post('https://jsonplaceholder.typicode.com/posts',data)
+   console.log(response);
    return response.data
 })
 const fetchSlice=createSlice({
@@ -29,6 +30,8 @@ const fetchSlice=createSlice({
     
     
     extraReducers:{
+
+        //get todos
         [getTodoAsync.pending]:(state,action)=>{
             state.isLoading=true
         },
@@ -39,7 +42,20 @@ const fetchSlice=createSlice({
         [getTodoAsync.rejected]:(state,action)=>{
             state.isLoading=false
             state.error=action.error.message
-        }
+        },
+
+        //add todo
+        [addTodoAsync.pending]:(state,action)=>{
+            state.isLoading=true
+        },
+        [addTodoAsync.fulfilled]:(state,action)=>{
+            state.todos=[...state.todos,action.payload]
+            state.isLoading=false
+        },
+        [addTodoAsync.rejected]:(state,action)=>{
+            state.isLoading=false
+            state.error=action.error.message
+        },
     }
 
 })
