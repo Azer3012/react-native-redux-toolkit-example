@@ -23,9 +23,9 @@ const TodoList = () => {
       <TouchableOpacity
         onPress={() => dispatch(completed(item.id))}
         style={styles.todo}>
-        <Text>{item.todo}</Text>
+        <Text style={[styles.todoText,item.completed && { textDecorationLine: 'line-through'}]}>{item.todo}</Text>
 
-        {item.completed && <Text>completed</Text>}
+        
         <TouchableOpacity onPress={() => dispatch(removeTodo(item.id))}>
           <IconTrash name="trash" size={17} color="red" />
         </TouchableOpacity>
@@ -105,4 +105,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
   },
+  todoText:{
+    flex:1,
+    
+    
+
+  }
 });
